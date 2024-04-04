@@ -1,0 +1,29 @@
+.example-card {
+    max-width: 240px;
+    img {
+        padding: 4px;
+        cursor: pointer;
+    }
+}
+
+mat-card-title {
+    padding-left: 16px;
+}
+
+.actions {
+    display: flex;
+}
+
+mat-card-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+p {
+    font-size: 8px;
+}
+
+mat-card {
+    background-color: #0a2351;
+    color: white;
+}

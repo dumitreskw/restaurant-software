@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <div class="header">
+    <mat-toolbar color="primary">
+      <div class="brand">
+        <span>Restoorant</span>
+      </div>
+      <div class="links spaced">
+        <a routerLink="/home" routerLinkActive="active-link">Home</a>
+        <a routerLink="/menu" routerLinkActive="active-link">Menu</a>
+        <!-- <a routerLink="/book-table" routerLinkActive="active-link">Book a table</a> -->
+        <a routerLink="/support" routerLinkActive="active-link">Support</a>
+        @if(isAdmin) {
+          <a routerLink="/dashboard" routerLinkActive="active-link">Admin</a>
+        }
+      </div>
+      <div class="auth spaced">
+        <button mat-button  (click)="onCartClicked()">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        @if(isAuthenticated) {
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+            {{username}}
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item disabled>
+              <mat-icon>person</mat-icon>
+              <span>My Profile</span>
+            </button>
+            <button mat-menu-item (click)="onOrdersClicked()">
+              <mat-icon>receipt</mat-icon>
+              <span>My Orders</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        } @else {
+          <a routerLink="/login" routerLinkActive="active-link">Login</a>
+          <a routerLink="/register" routerLinkActive="active-link">Register</a>
+        }
+      </div>
+    </mat-toolbar>
+  </div>
+  
+  <div class="body">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <div class="footer">
+  </div>
+</div>

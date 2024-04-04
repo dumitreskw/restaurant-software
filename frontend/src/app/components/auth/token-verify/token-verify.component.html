@@ -1,0 +1,15 @@
+<div class="wrapper">
+    <form [formGroup]="form" (ngSubmit)="verify()" class="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Token</mat-label>
+          <input type="number" matInput [formControl]="tokenControl">
+          @if (tokenControl.hasError('required')) {
+            <mat-error>Token is <strong>required</strong></mat-error>
+          }
+          @if (tokenControl.hasError('minlength') || tokenControl.hasError('maxlength')) {
+            <mat-error>Token should be <strong>3 characters</strong> long</mat-error>
+          }
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Verify account</button>
+    </form>
+</div>

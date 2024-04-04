@@ -1,0 +1,62 @@
+<div class="wrapper">
+    <h1 mat-dialog-title>Add new address</h1>
+    <div mat-dialog-content>
+      <form [formGroup]="form">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" [formControl]="nameControl">
+          @if (nameControl.value && !form.disabled) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="nameControl.reset()">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Phone number</mat-label>
+            <input matInput type="text" [formControl]="phoneNumberControl">
+            @if (phoneNumberControl.value && !form.disabled) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="phoneNumberControl.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput type="text" [formControl]="cityControl">
+            @if (cityControl.value && !form.disabled) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="cityControl.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Address Line 1</mat-label>
+            <input matInput type="text" [formControl]="addressLine1Control">
+            @if (addressLine1Control.value && !form.disabled) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="addressLine1Control.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Address Line 2</mat-label>
+            <input matInput type="text" [formControl]="addressLine2Control">
+            @if (addressLine2Control.value && !form.disabled) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="addressLine2Control.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </mat-form-field>
+      </form>
+    </div>
+    <div mat-dialog-actions>
+      <div class="actions">
+        <button mat-button mat-dialog-close color="secondary">Cancel</button>
+        <button mat-raised-button mat-dialog-close [disabled]="form.invalid" (click)="addAddress()" color="primary">Add</button>
+      </div>
+    </div>
+  </div>

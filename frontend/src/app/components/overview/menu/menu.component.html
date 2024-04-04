@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <mat-tab-group>
+      @for(category of categories; track null) {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <div class="tab-title">{{category.category}}</div>
+          </ng-template>
+          <div class="products">
+            @for(product of getProductsInCategory(category); track product) {
+              <app-product-card [product]="product"></app-product-card>
+            }
+          </div>
+        </mat-tab>
+      }
+      </mat-tab-group>
+  </div>
+  

@@ -1,0 +1,50 @@
+<div class="wrapper">
+    <form [formGroup]="form" (ngSubmit)="register()" class="form">
+      <div class="errors">
+        @if (differentPasswords) {
+          <p>Passwords do not match.</p>
+        }
+      </div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput [formControl]="usernameControl"
+                placeholder="Ex. andreiM">
+          @if (usernameControl.hasError('required')) {
+            <mat-error>Username is <strong>required</strong></mat-error>
+          }
+          @if (usernameControl.hasError('minlength')) {
+            <mat-error>Username should be at least <strong>3 characters</strong> long</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="emailControl"
+                   placeholder="Ex. name@example.com">
+            @if (emailControl.hasError('email') && !emailControl.hasError('required')) {
+              <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (emailControl.hasError('required')) {
+              <mat-error>Email is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [formControl]="passwordControl">
+            @if (passwordControl.hasError('required')) {
+              <mat-error>Password is <strong>required</strong></mat-error>
+            }
+            @if (passwordControl.hasError('minlength')) {
+              <mat-error>Password should be at least <strong>8 characters</strong> long</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input type="password" matInput [formControl]="cPasswordControl">
+            @if (cPasswordControl.hasError('required')) {
+              <mat-error>Password is <strong>required</strong></mat-error>
+            }
+          </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Register</button>
+    </form>
+</div>

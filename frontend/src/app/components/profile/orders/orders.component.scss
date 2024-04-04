@@ -1,0 +1,18 @@
+.wrapper {
+    width: 100v;    
+    height: 98vh;
+    margin: 16px;
+    border-radius: 8px;
+    background-color: #034694;
+
+    .content {
+        padding: 16px;
+        .title {
+            font-size: 24px;
+        }
+
+        .table {
+            margin-top: 32px;
+        }
+    }
+}

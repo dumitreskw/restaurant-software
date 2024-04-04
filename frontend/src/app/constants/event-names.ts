@@ -1,0 +1,4 @@
+export const EVENT_NAME = {
+    UPDATE_PRODUCTS: "UPDATE PRODUCTS",
+    ADD_ADDRESS: "ADD ADDRESS"
+} as const;

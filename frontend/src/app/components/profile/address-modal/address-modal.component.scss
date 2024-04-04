@@ -1,0 +1,24 @@
+.wrapper {
+    min-width: 600px;
+}
+form {
+    display: grid;
+    row-gap: 8px;
+
+    mat-form-field {
+        min-width: 200px;
+    }
+}
+
+mat-dialog-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.mat-mdc-dialog-actions {
+    justify-content: end;
+}
+
+.actions {
+    justify-self: end;
+}

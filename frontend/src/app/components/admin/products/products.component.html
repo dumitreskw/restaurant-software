@@ -1,0 +1,19 @@
+<div class="wrapper">
+    <mat-toolbar color="primary" class="toolbar">
+        <div class="brand">
+            <span>Products</span>
+        </div>  
+        <div class="actions">
+            <button mat-icon-button (click)="onOpenDialog()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <div class="content">
+        @if(products) {
+            @for(product of products; track product.name) {
+                <app-product-card [product]="product" [inEdit]="true"></app-product-card>
+            }
+        }
+    </div>
+</div>

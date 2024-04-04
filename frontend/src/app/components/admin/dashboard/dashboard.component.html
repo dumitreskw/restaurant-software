@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+        <div class="menu-item" routerLink="overview" routerLinkActive="active-link">Overview</div>
+        <div class="menu-item" routerLink="users" routerLinkActive="active-link">Users</div>
+        <div class="menu-item" routerLink="products" routerLinkActive="active-link">Products</div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

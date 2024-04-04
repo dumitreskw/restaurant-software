@@ -1,0 +1,17 @@
+.wrapper {
+    height: 80%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    .form {
+        width: 500px;
+        align-items: center;
+        display: grid;
+        grid-template-rows: repeat(3, auto);
+    }
+}
+
+button {
+    background-color: gray;
+}

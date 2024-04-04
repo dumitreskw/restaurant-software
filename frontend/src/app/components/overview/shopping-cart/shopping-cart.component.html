@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="content">
+        <div class="left-side">
+            <div class="products rounded">
+                @for (item of cart.items; track item.product._id) {
+                  <div class="product">
+                    <div class="name">{{item.product.name}}</div>
+                    <div class="quantity">
+                        <button mat-icon-button class="small-icon-button" (click)="onDeleteOne(item)"> <mat-icon>remove</mat-icon></button>
+                        <div class="text">{{item.quantity}}</div>
+                        <button mat-icon-button class="small-icon-button" (click)="onAddOne(item)"> <mat-icon>add</mat-icon></button>
+                    </div>
+                    <div class="remove">
+                        <div class="price">{{item.totalPrice}} RON</div>
+                        <button mat-icon-button class="small-icon-button" (click)="onDeleteItem(item)"> <mat-icon>close</mat-icon></button>
+                    </div>
+                  </div>
+                }
+            </div>
+            <div class="observations rounded">
+                <div class="title"> Observations </div>
+                <mat-form-field>
+                    <textarea matInput
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="2"
+                      cdkAutosizeMaxRows="5"></textarea>
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="summary rounded">
+                <div class="items">
+                    <div class="item">
+                        <div class="name">Food cost</div>
+                        <div class="price" *ngIf="cart.totalItems > 0">{{cart.totalPrice}} RON</div>
+                    </div>
+                    <div class="item">
+                        <div class="name">Operational fee</div>
+                        <div class="price" *ngIf="cart.totalItems > 0">2 RON</div>
+                    </div>
+                    <div class="item">
+                        <div class="name">Packaging fee</div>
+                        <div class="price" *ngIf="cart.totalItems > 0">{{packagingFee}} RON</div>
+                    </div>
+                    <div class="item last">
+                        <div class="name">Delivery fee</div>
+                        <div class="price" *ngIf="cart.totalItems > 0" >5 RON</div>
+                    </div>
+                    <div class="item" style="padding-top: 4px;">
+                        <div class="name">TOTAL</div>
+                        <div class="price" *ngIf="cart.totalItems > 0" >{{totalFee}} RON</div>
+                    </div>
+                </div>
+            </div>
+            <div class="address rounded">
+                <div class="header">
+                    <div class="title">Select delivery address</div>
+                    <div class="actions">
+                        <button mat-icon-button class="small-icon-button" (click)="onOpenAddAddress()"> <mat-icon>add</mat-icon></button>
+                    </div>
+                </div>
+
+                <div class="adresses">
+                    <mat-radio-group [formControl]="addressControl">
+                        @for(address of addresses; track null) {
+                            <mat-radio-button [value]="address._id"><div class="white-text">{{address.contactPerson}} - {{address.phoneNumber}} - {{address.city}} - {{address.addressLine1}}</div></mat-radio-button>
+                        }
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="checkout">
+                <button mat-raised-button (click)="onCheckout()">CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
