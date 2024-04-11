@@ -13,7 +13,21 @@
           <a routerLink="/dashboard" routerLinkActive="active-link">Admin</a>
         }
       </div>
+      <div class="search-bar">
+        @if(showSearchbar){
+          <mat-form-field class="search" >
+            <mat-label>Search</mat-label>
+            <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onProductSelected()">
+              @for (product of filteredOptions | async; track product) {
+                <mat-option [value]="product.name">{{product.name}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        }
+      </div>
       <div class="auth spaced">
+        <!-- Search bar -->
         <button mat-button  (click)="onCartClicked()">
           <mat-icon>shopping_cart</mat-icon>
         </button>

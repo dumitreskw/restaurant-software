@@ -9,10 +9,18 @@
 
     mat-toolbar {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: auto 1fr auto auto;
+        height: 78px;
 
         .links {
             justify-self: center;
+        }
+
+        .search-bar {
+            padding-top: 16px;
+            justify-self: center;
+            font-size: 12px;
+            height: max-content;
         }
     }
 }

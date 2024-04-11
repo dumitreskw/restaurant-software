@@ -38,6 +38,8 @@ import { AddressModalComponent } from './components/profile/address-modal/addres
 import { MatRadioModule } from '@angular/material/radio';
 import { OrdersComponent } from './components/profile/orders/orders.component';
 import {MatTableModule} from '@angular/material/table';
+import { ProductPageComponent } from './components/overview/product-page/product-page.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import {MatTableModule} from '@angular/material/table';
     ShoppingCartComponent,
     BookATableComponent,
     AddressModalComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSnackBarModule,
     MatMenuModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
   ],
   providers: [
     NgEventBus,

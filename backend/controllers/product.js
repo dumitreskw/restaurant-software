@@ -281,3 +281,27 @@ export const getProductById = async (req, res) => {
     });
   }
 };
+
+export const getProductsNames = async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    if (!products) {
+      return res.status(400).json({
+        success: false,
+        message: "No products are available, please add one",
+      });
+    }
+
+    const names = products.map(p => ({id: p._id, name: p.name}));
+
+    return res.status(200).json({
+      names
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};

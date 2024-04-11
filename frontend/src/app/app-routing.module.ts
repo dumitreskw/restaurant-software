@@ -15,6 +15,7 @@ import { TokenVerifyComponent } from './components/auth/token-verify/token-verif
 import { ShoppingCartComponent } from './components/overview/shopping-cart/shopping-cart.component';
 import { BookATableComponent } from './components/overview/book-a-table/book-a-table.component';
 import { OrdersComponent } from './components/profile/orders/orders.component';
+import { ProductPageComponent } from './components/overview/product-page/product-page.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
       {path: 'products', component:  ProductsComponent, canActivate:[adminGuard]},
     ]
   },
+  {path: "product", component: ProductPageComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "verify", component: TokenVerifyComponent}

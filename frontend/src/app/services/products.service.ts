@@ -46,4 +46,8 @@ export class ProductsService {
     return this.httpClient.post<any>(`${this.API_URL}/product-by-id`, {id: id});
   }
 
+  getProductsNames(): Observable<any> {
+    return this.httpClient.get<any>(`${this.API_URL}/product-names`, {});
+  }
+  
 }
