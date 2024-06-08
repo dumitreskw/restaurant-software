@@ -1,1 +1,92 @@
-<p>book-a-table works!</p>
+<div class="card"   >
+    <p-stepper>
+        <p-stepperPanel header="Select date">
+            <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        <form [formGroup]="formGroup">
+                            <p-calendar 
+                                class="max-w-full" 
+                                formControlName="date"
+                                inputId="calendar-24h"
+                                [hourFormat]="'24'"
+                                [inline]="true" 
+                                [showButtonBar]="true"
+                                [minDate]="minDateValue"
+                                [maxDate]="maxDateValue"
+                                (onClickOutside)="onLoseFocus()"
+                                (onSelect)="onTimeSelect($event)"
+                                 />
+                            </form>
+                    </div>
+                </div>
+                <div class="flex py-4 next">
+                    <p-button label="Next" (onClick)="nextCallback.emit(); onDateSelected()" [disabled]="!selectedDate"/>
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Select hour and number of persons">
+            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-nextCallback="nextCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        <form [formGroup]="formGroup" class="flex-auto">
+                            <label class="block font-bold mb-2" for="nothing">
+                                Select number of persons (1-12)
+                            </label>
+                            <p-inputNumber 
+                                formControlName="noPersons" 
+                                mode="decimal" 
+                                [useGrouping]="false"
+                                [showButtons]="true" 
+                                [min]="1"
+                                [max]="12">
+                            </p-inputNumber>
+                        </form>
+                        <div class="card flex-auto justify-content-center">
+    
+                            <label class="block font-bold mb-2" for="nothing">
+                                Select time interval
+                            </label>
+                            <p-listbox *ngIf="timeIntervals.length > 0"
+                                [options]="timeIntervals" 
+                                [(ngModel)]="selectedInterval" 
+                                optionLabel="value" 
+                                [style]="{'width':'15rem'}" 
+                                [listStyle]="{'max-height': '300px'}" />
+                        </div>
+    
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <div class="flex py-4">
+                        <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
+                    </div>
+                    <div class="flex py-4 next">
+                        <p-button label="Reserve" (onClick)="nextCallback.emit(); onReserve()" [disabled]="isReserveDisabled" />
+                    </div>
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+        <p-stepperPanel header="Confirmation">
+            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
+                <div class="flex flex-column h-12rem">
+                    <div class="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                        <div class="success-page" *ngIf="!!success && success"> 
+                                <i class="pi pi-check-circle" style="font-size: 4rem;"></i>
+                                <h2>Reservation Confirmed!</h2>
+                                <p>Thank you for booking your table. We look forward to seeing you soon.</p>
+                                <button pButton label="View My Reservations" (click)="onViewReservations()"></button>
+                        </div>
+                        <div class="error-page" *ngIf="!!success && !success">
+                            <i class="pi pi-exclamation-triangle" style="font-size: 4rem; color: red;"></i>
+                            <h2>Reservation Error</h2>
+                            <p>We're sorry, there was an error processing your reservation.</p>
+                            <button pButton label="Back to Home" (click)="onGoToHome()" class="p-button-secondary"></button>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-stepperPanel>
+    </p-stepper>
+</div>

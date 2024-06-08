@@ -1,21 +1,27 @@
-<mat-card class="example-card">
-    <img mat-card-image src="https://assets.tmecosys.com/image/upload/t_web600x528/img/recipe/ras/Assets/5802fab5-fdce-468a-a830-43e8001f5a72/Derivates/c00dc34a-e73d-42f0-a86e-e2fd967d33fe.jpg" (click)="onOpenDialog()">
-    <mat-card-title>{{product.name}}</mat-card-title>
-    <mat-card-actions>
-        <div class="price">{{product.price}} Ron</div>
-        @if(inEdit) {
-            <div class="actions">
-                <button mat-icon-button color="primary" (click)="onOpenDialog()">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button mat-icon-button color="primary" (click)="onDelete()">
-                    <mat-icon>delete</mat-icon>
-                  </button>
-            </div>
-        } @else {
-            <button mat-icon-button color="primary" (click)="addItem()">
-                <mat-icon>add_shopping_cart</mat-icon>
-            </button>
-        }
-    </mat-card-actions>
-  </mat-card>
+
+  <p-card [header]="product.name" [style]="{ width: '300px' }">
+    <ng-template pTemplate="header">
+        <img alt="Card" src="https://assets.tmecosys.com/image/upload/t_web600x528/img/recipe/ras/Assets/5802fab5-fdce-468a-a830-43e8001f5a72/Derivates/c00dc34a-e73d-42f0-a86e-e2fd967d33fe.jpg" (click)="onOpenDialog()" />
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1 footer">
+            <p-button [label]="product.price.toString() + ' RON'" [disabled]="true" [text]="true" severity="secondary" />
+            @if(inEdit) {
+                <div class="actions">
+                    <button mat-icon-button color="primary" (click)="onOpenDialog()">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="primary" (click)="onDelete()">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                </div>
+            } @else {
+                <div class="user-actions">
+                    <button mat-icon-button color="primary" (click)="addItem()">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                </div>
+            }
+        </div>
+    </ng-template>
+</p-card>

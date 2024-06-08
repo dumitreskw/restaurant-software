@@ -1,0 +1,41 @@
+.wrapper {
+    height: 90vh;
+    //background-color: #ffffff;
+    border-radius: 1rem;
+    //border: 1px solid rgb(228, 228, 228);
+
+    //padding: 1rem;
+}
+
+
+.field-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 82vh;
+    overflow-y: auto;
+}
+.content {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 1rem;
+
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+    .middle {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+
+h2 {
+    margin: 0;
+}
+
+p-fieldset {
+    height: 100%;
+}

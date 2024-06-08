@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <div class="content">
+    <ion-datetime presentation="date" [min]="today" [max]="maxDate" (ionChange)="onDateChanged($event)">
+    </ion-datetime>
+  
+    <div class="available-dates">
+      @for (hours of allHours; track null) {
+        <ion-chip color="success">{{hours}}</ion-chip>
+      }
+    </div>
+  </div>
+
+  <div class="actions">
+    
+  </div>
+
+</div>
+

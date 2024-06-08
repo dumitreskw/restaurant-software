@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { ProductsService } from './services/products.service';
 import { ProductName } from './models/product-with-name';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgEventBus } from 'ng-event-bus';
 import { EVENT_NAME } from './constants/event-names';
 import { map, Observable, startWith } from 'rxjs';
+import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +18,19 @@ import { map, Observable, startWith } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  items: MenuItem[] | undefined;
   title = 'restorant-web';
   options: any[] = [];
   products: ProductName[] = [];
-  showSearchbar = false;
+  showSearchbar = true;
   searchControl = new FormControl('');
   filteredOptions!: Observable<ProductName[]>;
+  formGroup!: FormGroup;
+
+  allProducts: any[] | undefined;
+  filteredProducts: any[] = [];
 
   constructor(private authService: AuthenticationService,
-    private cookieService: CookieService,
     private productsService: ProductsService,
     private router: Router,
     private eventBus: NgEventBus
@@ -33,13 +39,33 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initializeMenu();
     this.getProducts();
+
+    this.formGroup = new FormGroup({
+      searchControl: this.searchControl
+    })
 
     this.filteredOptions = this.searchControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
   }
+
+  filterProducts(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+    let query = event.query;
+
+    for (let i = 0; i < (this.allProducts as any[]).length; i++) {
+        let country = (this.allProducts as any[])[i];
+        if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(country);
+        }
+    }
+
+    this.filteredProducts = filtered;
+}
+
   private _filter(value: string): any {
     const filterValue = value.toLowerCase();
 
@@ -70,10 +96,13 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/orders');
   }
 
+  onMyReservationsClicked() {
+    this.router.navigateByUrl('/my-reservations');
+  }
+
   onProductSelected() {
     const value = this.searchControl.value;
-    const id = this.products.find(a => a.name == value)?.id;
-
+    const id = (value as any).id;
     
     if(id){
       this.router.navigate(['/product', {id: id}])
@@ -85,12 +114,46 @@ export class AppComponent implements OnInit {
 
   getProducts(): void {
     this.productsService.getProductsNames().subscribe({
-      next: (res) => this.products = res.names,
+      next: (res) => {
+        this.products = res.names
+        this.allProducts = res.names
+      },
       complete: () => {this.showSearchbar = true;},
       error: (err) => {
         console.error(err);
         this.showSearchbar = false;
       }
     });
+  }
+
+  private initializeMenu(): void {
+    this.items = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        link: '/home'
+      },
+      {
+        label: 'Menu',
+        icon: 'pi pi-book',
+        link: '/menu'
+      },
+      {
+        label: 'Reservations',
+        icon: 'pi pi-calendar-clock',
+        link: '/book-table'
+      },
+      {
+        label: 'Support',
+        icon: 'pi pi-users',
+        link: '/support'
+      },
+      {
+        label: 'Dashboard',
+        icon: 'pi pi-bolt',
+        link: '/dashboard',
+        authorization: 'true'
+      },
+    ];
   }
 }

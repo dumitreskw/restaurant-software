@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { addressSchema } from "./address.js";
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -61,5 +61,6 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 userSchema.index({ otp_expiry: 1 }, { expireAfterSeconds: 0 });
+
 
 export const User = mongoose.model("User", userSchema);

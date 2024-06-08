@@ -10,6 +10,10 @@ mat-card-title {
     padding-left: 16px;
 }
 
+.user-actions {
+    display: flex;
+}
+
 .actions {
     display: flex;
 }
@@ -26,4 +30,25 @@ p {
 mat-card {
     background-color: #0a2351;
     color: white;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex {
+    display: flex; /* Enable flexbox layout */
+}
+
+.gap-3 {
+    gap: 0.75rem; /* Set a gap of 0.75rem (12px) between flex items */
+}
+
+.mt-1 {
+    margin-top: 0.25rem; /* Add a top margin of 0.25rem (4px) */
+}
+
+.w-full {
+    width: 100%; /* Make the element take up the full available width */
 }

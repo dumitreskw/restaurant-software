@@ -1,0 +1,8 @@
+@for (category of displayedCategory; track category) {
+    <div class="category-content">
+        <h1 class="title">{{category.category}}</h1>
+        @for (product of category.products; track null) {
+            <app-product [product]="product" [isFood]="isFoodCategory(category)"></app-product>
+        }
+    </div>
+}

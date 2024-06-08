@@ -3,12 +3,72 @@
 }
 
 .products {
-    padding: 16px;
     flex-wrap: wrap;
     display: flex;
     gap: 16px;
+    overflow-y: auto;
+    min-height: 50vh;
+    max-height: 81vh;
 }
 
 .mat-mdc-tab-label-container{
     max-width: 600px;
+}
+
+.wrapper {
+    width: 90vw;
+    height: 100vh;
+
+    .left-menu {
+        height: 100vh;
+        width: 300px;
+        padding: 16px;
+    }
+
+    .content {
+        padding: 16px;
+        display: flex;
+        min-height: 80vh;
+        min-width: 81vw;
+        max-width: 90vw;
+        flex-direction: column;
+        gap: 16px;
+
+        .filters {
+            width: 81vw;
+            height: 56px;
+            background-color: #0a2351;
+            display: flex;
+            padding: 8px;
+            align-items: center;
+            justify-content: space-between;
+
+            .right-filters {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    .wrapper-new{
+        display: flex;
+        gap: 16px;
+    }
+}
+
+span {
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+}
+
+mat-divider {
+    border-top-color: black;
+}
+
+.active {
+    background-color: rgba(165, 165, 165, 0.075);
+}
+
+.cursor {
+    cursor: pointer;
 }

@@ -1,0 +1,22 @@
+.content {
+    display: flex;
+    gap: 16px;
+
+    img {
+        height: 64px;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+
+        ion-label {
+            text-wrap: stable;
+            font-size: larger;
+        }
+    }
+
+    .actions {
+        
+    }
+}

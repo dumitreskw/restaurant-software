@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { ProductsService } from '../../../../services/products.service';
 import { CartService } from '../../../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -15,10 +16,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductCardComponent {
   @Input() product!: Product;
   @Input() inEdit: boolean = false;
+  priceString: string = '';
+  
   constructor(public dialog: MatDialog,
     private authService: AuthenticationService,
     private productsService: ProductsService,
     private cartService: CartService,
+    private router: Router,
     private snackbar: MatSnackBar) {
     let dummyProduct = new Product();
     dummyProduct.name = 'Telescop';
@@ -28,6 +32,8 @@ export class ProductCardComponent {
     if (!this.product) {
       this.product = dummyProduct;
     }
+
+    this.priceString = `${this.product.price.toString()} RON`
   }
 
   onDelete() {
@@ -45,6 +51,9 @@ export class ProductCardComponent {
           productId: productId,
         },
       });
+    }
+    else {
+      this.router.navigate(['/product', {id: this.product._id}])
     }
   }
 

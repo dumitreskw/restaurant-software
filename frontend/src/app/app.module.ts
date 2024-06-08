@@ -40,6 +40,12 @@ import { OrdersComponent } from './components/profile/orders/orders.component';
 import {MatTableModule} from '@angular/material/table';
 import { ProductPageComponent } from './components/overview/product-page/product-page.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ImportsModule } from './primeng-imports';
+import { SvgIconComponent } from './components/common/svg-icon/svg-icon.component';
+import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +67,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     BookATableComponent,
     AddressModalComponent,
     OrdersComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    SvgIconComponent,
+    MyReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,11 +97,14 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatMenuModule,
     MatRadioModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatListModule,
+    ImportsModule
   ],
   providers: [
     NgEventBus,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000, horizontalPosition: 'end', verticalPosition: 'bottom' } }
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000, horizontalPosition: 'end', verticalPosition: 'bottom' } },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

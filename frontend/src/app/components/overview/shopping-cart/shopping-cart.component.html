@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
     <div class="content">
         <div class="left-side">
             <div class="products rounded">
@@ -75,5 +75,98 @@
             </div>
         </div>
     </div>
+</div> -->
+
+
+<p-card header="Shopping cart">
+    <div class="content">
+        <div class="cart">
+                <p-dataView #dv [value]="cart.items">
+                    <ng-template pTemplate="list" let-items>
+                        <div class="grid grid-nogutter">
+                            <div class="col-12" *ngFor="let item of items; let first = first" class="col-12">
+                                <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                                    <div class="md:w-10rem relative">
+                                        <img class="block xl:block mx-auto border-round w-full p-image" src="https://assets.tmecosys.com/image/upload/t_web600x528/img/recipe/ras/Assets/5802fab5-fdce-468a-a830-43e8001f5a72/Derivates/c00dc34a-e73d-42f0-a86e-e2fd967d33fe.jpg"/>
+                                    </div>
+                                    <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
+                                        <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
+                                            <div>
+                                                <div class="text-lg font-medium text-900 mt-2">{{ item.product.name }}</div>
+                                                <div class="text-lg font-medium text-900 mt-2">Quantity: {{ item.quantity }}</div>
+                                            </div>
+                                            <div class="surface-100 p-1" style="border-radius: 30px">
+                                                <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
+                                                    <span class="text-900 font-medium text-sm">{{ item.totalPrice }}</span>
+                                                    <i class="pi pi-star-fill text-yellow-500"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-column md:align-items-end gap-5">
+                                            <span class="text-xl font-semibold text-900">{{ item.totalPrice + ' RON'}}</span>
+                                            <div class="flex flex-row-reverse md:flex-row gap-2">
+                                                <p-button icon="pi pi-minus" [outlined]="true" severity="warning" (onClick)="onDeleteOne(item)"/>
+                                                <p-button icon="pi pi-plus" [outlined]="true" (onClick)="onAddOne(item)"/>
+                                                <p-button icon="pi pi-trash" severity="danger" class="flex-auto md:flex-initial white-space-nowrap" label="Remove" (onClick)="onDeleteItem(item)"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+        </div>
+
+        <p-divider layout="vertical"></p-divider>
+
+        <div class="summary">
+            <p-card header="Summary">
+                <div class="costs">
+                    <p-fieldset legend="Costs">
+                        <ul class="items">
+                            <li class="item">
+                                <div class="name">Food cost</div>
+                                <div class="price" *ngIf="cart.totalItems > 0">{{cart.totalPrice}} RON</div>
+                            </li>
+                            <li class="item">
+                                <div class="name">Operational fee</div>
+                                <div class="price" *ngIf="cart.totalItems > 0">2 RON</div>
+                            </li>
+                            <li class="item">
+                                <div class="name">Packaging fee</div>
+                                <div class="price" *ngIf="cart.totalItems > 0">{{packagingFee}} RON</div>
+                            </li>
+                            <li class="item last">
+                                <div class="name">Delivery fee</div>
+                                <div class="price" *ngIf="cart.totalItems > 0" >5 RON</div>
+                            </li>
+                            <li class="item" style="padding-top: 4px;">
+                                <div class="name">TOTAL</div>
+                                <div class="price" *ngIf="cart.totalItems > 0" >{{totalFee}} RON</div>
+                            </li>
+                        </ul>
+                    </p-fieldset>
     
-</div>
+                    <p-fieldset legend="Address">
+                        <div class="flex address">
+                                <p>Select an address</p>
+                                <p-button icon="pi pi-plus" [outlined]="true" (onClick)="onOpenAddAddress()"/>
+                        </div>
+                        <p-listbox 
+                            [options]="addresses" 
+                            [(ngModel)]="selectedAddress" 
+                            optionLabel="addressLine1" 
+                            [style]="{'width':'100%'}" 
+                            [listStyle]="{'max-height': '220px'}" />
+                    </p-fieldset>
+
+                    <p-fieldset legend="Checkout">
+                        <p-button icon="pi pi-trash" [style]="{'width':'100%'}"  class="flex-auto md:flex-initial white-space-nowrap" label="Go to payment"/>
+                    </p-fieldset>
+
+                </div>
+            </p-card>
+        </div>
+    </div>
+</p-card>

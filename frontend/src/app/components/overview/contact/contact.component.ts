@@ -35,9 +35,5 @@ export class ContactComponent implements OnInit {
       text: new FormControl('', Validators.required),
     });
 
-    if(this.authService.isAuthenticated()) {
-      this.emailControl.disable();
-      this.emailControl.setValue('test@test.com');
-    }
   }
 }

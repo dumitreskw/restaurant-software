@@ -25,6 +25,7 @@ export class ProductModalComponent implements OnInit, OnDestroy {
   inEditMode: boolean = false;
   form!: FormGroup;
   categories: string[] = [];
+  productTypes: string[] = ["Food", "Drinks"];
   private product!: Product;
   private onComponentDestroy: Subject<void> = new Subject();
   constructor(
@@ -56,6 +57,10 @@ export class ProductModalComponent implements OnInit, OnDestroy {
 
   get newCategoryControl() {
     return this.form.controls['newCategory'] as FormControl;
+  }
+
+  get typeControl() {
+    return this.form.controls['type'] as FormControl;
   }
 
   get nameControl() {
@@ -102,6 +107,7 @@ export class ProductModalComponent implements OnInit, OnDestroy {
       this.categoryControl.value == 'Add new...'
         ? this.newCategoryControl.value
         : this.categoryControl.value;
+    request.type = this.typeControl.value;
 
     this.productsService
       .addProduct(request)
@@ -163,6 +169,7 @@ export class ProductModalComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       category: new FormControl('', Validators.required),
       newCategory: new FormControl(''),
+      type: new FormControl(''),
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       price: new FormControl('', Validators.required),

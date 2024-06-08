@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{product.name}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" [strong]="true">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    {{product.name}}
+  </ion-item>
+  <ion-item>
+    {{product.categoryName}}
+  </ion-item>
+  <ion-item>
+    {{product.description}}
+    {{product.price}}
+  </ion-item>
+  <ion-item>
+    {{product.price}} RON
+  </ion-item>
+</ion-content>

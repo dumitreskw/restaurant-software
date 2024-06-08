@@ -1,0 +1,22 @@
+@if (product) {
+  <ion-card>
+    <ion-card-content>
+      <div class="content">
+        @if (isFood) {
+          <img alt="Silhouette of mountains" src="https://www.svgrepo.com/show/4151/food.svg" />
+        }
+        @else {
+          <img alt="Silhouette of mountains" src="https://www.svgrepo.com/show/444797/drink-cocktail.svg" />
+        }
+        <div class="text">
+          <ion-card-title>{{product.name}}</ion-card-title>
+          <ion-label>{{product.price}} RON</ion-label>
+        </div>
+      </div>
+    </ion-card-content>
+  
+    <div class="actions">
+      <ion-button fill="clear" (click)="onDetailsClicked()">Details</ion-button>
+    </div>
+  </ion-card>
+}

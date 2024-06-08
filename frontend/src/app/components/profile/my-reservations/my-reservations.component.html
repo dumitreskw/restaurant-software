@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <p-fieldset [style]="{ height: '100%' }" legend="My Reservations">
+    <div class="field-content">
+      @for (reservation of reservations; track null) {
+      <p-card>
+        <div class="content">
+          <div class="left">
+            <i class="pi pi-calendar-clock" style="font-size: 3.5rem"></i>
+          </div>
+          <div class="middle">
+            <h2>
+              {{ reservation.size }} people 
+            </h2>
+            <h2>|</h2>
+            <h2>
+              {{ getReservationHour(reservation) }}
+            </h2>
+          </div>
+          <div class="right">
+            <h2 style="color:red" *ngIf="reservation.status == 'CANCELED'">CANCELED</h2>
+            <h2 style="color:green" *ngIf="reservation.status == 'COMPLETED'">COMPLETED</h2>
+            <p-button label="Cancel" [outlined]="true" severity="danger" *ngIf="reservation.status == 'PENDING'"/>
+          </div>
+        </div>
+      </p-card>
+      }
+    </div>
+  </p-fieldset>
+</div>

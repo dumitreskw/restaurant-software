@@ -145,7 +145,6 @@ export const getAdresses = async (req, res) => {
       });
     }
 
-
     return res.status(200).json(user.addresses);
   } catch (error) {
     return res.status(500).json({

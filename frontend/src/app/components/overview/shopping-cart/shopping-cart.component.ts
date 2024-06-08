@@ -20,6 +20,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   cart: Cart = new Cart();
   addresses: any[] = [];
   addressControl: FormControl = new FormControl('', Validators.required);
+  selectedAddress: any;
   private onComponentDestroy: Subject<any> = new Subject<any>();
 
   constructor(

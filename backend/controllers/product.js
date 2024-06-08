@@ -19,7 +19,7 @@ export const getCategories = async (req, res) => {
 };
 
 export const addCategory = async (req, res) => {
-  const { name } = req.body;
+  const { name, type } = req.body;
 
   if (!name) {
     return res.status(400).json({
@@ -37,8 +37,13 @@ export const addCategory = async (req, res) => {
       });
     }
 
+    if (!type) {
+      type = "Food";
+    }
+
     category = await Category.create({
       name,
+      type,
       products: [],
     });
 
@@ -47,7 +52,6 @@ export const addCategory = async (req, res) => {
       message: "Category added",
     });
   } catch (error) {
-    console.log("here");
     return res.status(500).json({
       success: false,
       message: error,
@@ -89,13 +93,16 @@ export const getProductsWithCategories = async (req, res) => {
       });
     }
     let categoriesWithProducts = [];
+
     categories.forEach((c) => {
       categoriesWithProducts.push({
         category: c.name,
+        type: c.type,
         products: c.products,
       });
     });
 
+    console.log(categoriesWithProducts);
     return res.status(200).json({
       success: true,
       categories: categoriesWithProducts,
@@ -134,7 +141,7 @@ export const getProductsByCategory = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { name, price, description, quantity, categoryName } = req.body;
+  const { name, price, description, quantity, categoryName, type } = req.body;
   console.log(req.body);
   if (!name || !price || !description || !categoryName) {
     return res.status(400).json({
@@ -149,6 +156,7 @@ export const addProduct = async (req, res) => {
     if (!category) {
       category = await Category.create({
         name: categoryName,
+        type: type,
         products: [],
       });
     }
@@ -261,7 +269,7 @@ export const deleteProduct = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const { id } = req.body;
-    const product = await Product.findOne({_id : id});
+    const product = await Product.findOne({ _id: id });
 
     if (!product) {
       return res.status(400).json({
@@ -293,10 +301,10 @@ export const getProductsNames = async (req, res) => {
       });
     }
 
-    const names = products.map(p => ({id: p._id, name: p.name}));
+    const names = products.map((p) => ({ id: p._id, name: p.name }));
 
     return res.status(200).json({
-      names
+      names,
     });
   } catch (error) {
     return res.status(500).json({

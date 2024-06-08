@@ -16,6 +16,7 @@ import { ShoppingCartComponent } from './components/overview/shopping-cart/shopp
 import { BookATableComponent } from './components/overview/book-a-table/book-a-table.component';
 import { OrdersComponent } from './components/profile/orders/orders.component';
 import { ProductPageComponent } from './components/overview/product-page/product-page.component';
+import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'shopping-cart', component: ShoppingCartComponent},
   {path: 'book-table', component: BookATableComponent},
   {path: 'orders', component: OrdersComponent},
+  {path: 'my-reservations', component: MyReservationsComponent},
   {path: 'dashboard', 
     component: DashboardComponent,
     canActivate:[adminGuard],
