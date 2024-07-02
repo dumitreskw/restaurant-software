@@ -8,9 +8,6 @@ import { sendToken } from "../utils/sendToken.js";
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    // const { avatar } = req.files;
-
-    console.log(req.body);
 
     let user = await User.findOne({ email });
     if (user) {

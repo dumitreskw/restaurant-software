@@ -45,7 +45,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ImportsModule } from './primeng-imports';
 import { SvgIconComponent } from './components/common/svg-icon/svg-icon.component';
 import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
-
+import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -69,13 +70,15 @@ import { MyReservationsComponent } from './components/profile/my-reservations/my
     OrdersComponent,
     ProductPageComponent,
     SvgIconComponent,
-    MyReservationsComponent
+    MyReservationsComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxFileDropModule,
     JwtModule.forRoot({
       config: {
         allowedDomains: ["localhost"],

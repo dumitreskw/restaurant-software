@@ -3,4 +3,5 @@ export class UpdateProductRequest {
     description?: string;
     price?: string;
     id!: string;
+    imageUrl?: string;
 }

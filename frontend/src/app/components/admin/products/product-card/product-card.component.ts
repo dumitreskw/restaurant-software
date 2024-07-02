@@ -17,6 +17,7 @@ export class ProductCardComponent {
   @Input() product!: Product;
   @Input() inEdit: boolean = false;
   priceString: string = '';
+  image: string = 'http://localhost:3000/images/no-image.jpg';
   
   constructor(public dialog: MatDialog,
     private authService: AuthenticationService,
@@ -32,7 +33,7 @@ export class ProductCardComponent {
     if (!this.product) {
       this.product = dummyProduct;
     }
-
+  
     this.priceString = `${this.product.price.toString()} RON`
   }
 
@@ -51,6 +52,8 @@ export class ProductCardComponent {
           productId: productId,
         },
       });
+
+      console.log(this.product)
     }
     else {
       this.router.navigate(['/product', {id: this.product._id}])

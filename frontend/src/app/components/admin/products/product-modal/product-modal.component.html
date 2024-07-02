@@ -1,6 +1,12 @@
 <div class="wrapper">
   <h1 mat-dialog-title>{{title}}</h1>
   <div mat-dialog-content>
+    <div class="file-upload-main">
+      <div class="photo" >
+        <img [src]="imageUrl" alt="Uploaded image" *ngIf="imageUrl">
+      </div>
+      <app-file-upload (fileUploadedEvent)="onImageUpload($event)"></app-file-upload>
+    </div>
     <form [formGroup]="form">
       <mat-form-field>
         <mat-label>Category</mat-label>

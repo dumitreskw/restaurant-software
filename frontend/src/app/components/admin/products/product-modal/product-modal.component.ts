@@ -24,6 +24,7 @@ export class ProductModalComponent implements OnInit, OnDestroy {
   isEditable!: boolean;
   inEditMode: boolean = false;
   form!: FormGroup;
+  imageUrl!: string;
   categories: string[] = [];
   productTypes: string[] = ["Food", "Drinks"];
   private product!: Product;
@@ -82,6 +83,10 @@ export class ProductModalComponent implements OnInit, OnDestroy {
   setTitle(): void {
     this.isEditable = !!this.data;
     this.title = !this.isEditable ? 'Add new product' : 'Edit product';
+  }
+
+  onImageUpload(url: string) {
+    this.imageUrl = url;
   }
 
   getCategories(): void {
@@ -148,6 +153,9 @@ export class ProductModalComponent implements OnInit, OnDestroy {
     request.description = this.descriptionControl.value;
     request.name = this.nameControl.value;
     request.price = this.priceControl.value;
+    request.imageUrl = this.imageUrl;
+
+    console.log(request)
 
     this.productsService
       .updateProduct(request)
