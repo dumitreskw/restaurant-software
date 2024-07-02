@@ -209,7 +209,7 @@ import { NgModule } from '@angular/core';
     StyleClassModule,
     IconFieldModule,
     InputIconModule,
-    AutoFocusModule
+    AutoFocusModule,
   ],
   exports: [
     AvatarModule,

@@ -7,6 +7,8 @@ import cors from "cors";
 import ReservationRouter from "./routers/reservation.js";
 import multer from "multer";
 import path from "path";
+import TicketsRouter from "./routers/ticket.js";
+import StatisticsRouter from "./routers/statistics.js";
 
 export const app = express();
 const storage = multer.diskStorage({
@@ -51,15 +53,13 @@ app.use(cookieParser());
 app.use("/api/v1", user);
 app.use("/api/v1/cart", cart);
 app.use("/api/v1/invoice", invoice);
-app.use("/api/v1", ReservationRouter)
+app.use("/api/v1", ReservationRouter);
+app.use("/api/v1", TicketsRouter);
+app.use("/api/v1", StatisticsRouter);
 app.use('/images', express.static('./uploads/images')); 
 app.get("/", (req, res) => {
   res.send("Server is working");
 });
-// app.post('/api/v1/upload', upload.single('file'), (req, res) => {
-//   console.log(req);
-//   res.json(req.file);
-// })
 
 app.post('/api/v1/upload', upload.single('image'), (req, res) => {
   try {

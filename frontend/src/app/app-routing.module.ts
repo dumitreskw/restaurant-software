@@ -17,6 +17,8 @@ import { BookATableComponent } from './components/overview/book-a-table/book-a-t
 import { OrdersComponent } from './components/profile/orders/orders.component';
 import { ProductPageComponent } from './components/overview/product-page/product-page.component';
 import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
+import { MyTicketsComponent } from './components/profile/my-tickets/my-tickets.component';
+import { AdminTicketsComponent } from './components/admin/admin-tickets/admin-tickets.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -27,6 +29,7 @@ const routes: Routes = [
   {path: 'book-table', component: BookATableComponent},
   {path: 'orders', component: OrdersComponent},
   {path: 'my-reservations', component: MyReservationsComponent},
+  {path: 'my-tickets', component: MyTicketsComponent},
   {path: 'dashboard', 
     component: DashboardComponent,
     canActivate:[adminGuard],
@@ -34,6 +37,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'overview', pathMatch: 'full'},
       {path: 'overview', component: AdminOverviewComponent, canActivate:[adminGuard]},
       {path: 'users', component:  UsersComponent, canActivate:[adminGuard]},
+      {path: 'tickets', component:  AdminTicketsComponent, canActivate:[adminGuard]},
       {path: 'products', component:  ProductsComponent, canActivate:[adminGuard]},
     ]
   },

@@ -47,6 +47,12 @@ import { SvgIconComponent } from './components/common/svg-icon/svg-icon.componen
 import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
 import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { MyTicketsComponent } from './components/profile/my-tickets/my-tickets.component';
+import { ViewTicketModalComponent } from './components/common/view-ticket-modal/view-ticket-modal.component';
+import { ChartComponent } from './components/common/chart/chart.component';
+import { AdminTicketsComponent } from './components/admin/admin-tickets/admin-tickets.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminReservationsComponent } from './components/admin/admin-reservations/admin-reservations.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +77,13 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     ProductPageComponent,
     SvgIconComponent,
     MyReservationsComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    MyTicketsComponent,
+    ViewTicketModalComponent,
+    ChartComponent,
+    AdminTicketsComponent,
+    AdminOrdersComponent,
+    AdminReservationsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,12 +10,13 @@ import { NgEventBus } from 'ng-event-bus';
 import { EVENT_NAME } from './constants/event-names';
 import { map, Observable, startWith } from 'rxjs';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit {
   items: MenuItem[] | undefined;
@@ -96,6 +97,10 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/orders');
   }
 
+  onMyTicketsClicked() {
+    this.router.navigateByUrl('/my-tickets');
+  }
+
   onMyReservationsClicked() {
     this.router.navigateByUrl('/my-reservations');
   }
@@ -146,7 +151,8 @@ export class AppComponent implements OnInit {
       {
         label: 'Support',
         icon: 'pi pi-users',
-        link: '/support'
+        link: '/support',
+        authorization: 'true'
       },
       {
         label: 'Dashboard',

@@ -6,6 +6,8 @@ import { CartService } from '../../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgEventBus } from 'ng-event-bus';
 import { EVENT_NAME } from '../../../constants/event-names';
+import { MessageService } from 'primeng/api';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-product-page',
@@ -22,7 +24,9 @@ export class ProductPageComponent implements OnInit {
     private productService: ProductsService,
     private cartService: CartService,
     private snackbar: MatSnackBar,
-    private eventBus: NgEventBus
+    private eventBus: NgEventBus,
+    private messageService: MessageService,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class ProductPageComponent implements OnInit {
     this.cartService.addToCart(this.productId).subscribe({
       next: (res) => {
         if (res.success) {
-          this.snackbar.open(`Product ${this.product.name} added to cart`);
+          this.showConfirmation(`Product ${this.product.name} added to cart`);
         }
       },
       error: (error) => {
@@ -42,6 +46,10 @@ export class ProductPageComponent implements OnInit {
         this.snackbar.open('There was an error adding this item to cart');
       },
     });
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   subscribeToRouteChanged(): void {
@@ -72,5 +80,9 @@ export class ProductPageComponent implements OnInit {
         this.showPage = false;
       },
     });
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 }

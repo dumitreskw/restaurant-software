@@ -1,4 +1,5 @@
 <div class="wrapper">
+  <p-fieldset legend="Register">
     <form [formGroup]="form" (ngSubmit)="register()" class="form">
       <div class="errors">
         @if (differentPasswords) {
@@ -47,4 +48,5 @@
           </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Register</button>
     </form>
+  </p-fieldset>
 </div>

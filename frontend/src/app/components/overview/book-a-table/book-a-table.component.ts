@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { ReservationService } from '../../../services/reservation.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 interface TimeInterval {
   value: string;
@@ -26,7 +27,9 @@ export class BookATableComponent implements OnInit {
   success!: boolean;
 
   constructor(private reservationService: ReservationService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private authService: AuthenticationService
   ) {
     this.maxDateValue.setDate(this.maxDateValue.getDate() + 14);
   }
@@ -41,7 +44,9 @@ export class BookATableComponent implements OnInit {
       ]),
     });
 
-    this.getReservationsByUser();
+    if(!this.isAuthenticated) {
+      this.showError("You must be logged in to use this functionality.")
+    }
   }
 
   onTimeSelect(event: any) {
@@ -49,12 +54,7 @@ export class BookATableComponent implements OnInit {
     this.selectedDate.setHours(12, 0, 0, 0); // Reset to 12:00 PM
   }
 
-  onLoseFocus() {
-    console.log(this.formGroup);
-  }
-
   onDateSelected() {
-    console.log(this.selectedDate);
     this.getAvailableTimeIntervals();
   }
 
@@ -71,9 +71,6 @@ export class BookATableComponent implements OnInit {
   }
 
   onReserve() {
-    console.log(this.selectedInterval);
-    console.log(this.formGroup.controls['noPersons'].value);
-
     this.reservationService
       .createReservation(
         this.selectedDate,
@@ -81,18 +78,26 @@ export class BookATableComponent implements OnInit {
         this.selectedInterval.value
       )
       .subscribe({
-        complete: () => this.success = true,
+        complete: () => {
+          this.success = true;
+          this.showConfirmation("Reservation created successfully.")
+        },
         error: (err) => {
           console.error(err);
           this.success = false;
+          this.showError("There was an error confirming your reservation. Please try again later.")
         }
       });
   }
 
   get isReserveDisabled() {
     return (
-      !this.selectedInterval || !this.formGroup.controls['noPersons'].value
+      !this.selectedInterval || !this.formGroup.controls['noPersons'].value || !this.authService.isAuthenticated()
     );
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   onViewReservations() {
@@ -105,5 +110,13 @@ export class BookATableComponent implements OnInit {
 
   private getReservationsByUser() {
     this.reservationService.getReservations().subscribe(r => console.log(r));
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

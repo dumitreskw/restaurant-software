@@ -18,7 +18,7 @@
                 </div>
             } @else {
                 <div class="user-actions">
-                    <button mat-icon-button color="primary" (click)="addItem()">
+                    <button mat-icon-button color="primary" (click)="addItem()" *ngIf="isAuthenticated">
                         <mat-icon>add_shopping_cart</mat-icon>
                     </button>
                 </div>

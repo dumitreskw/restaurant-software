@@ -7,6 +7,7 @@ import { ProductsService } from '../../../../services/products.service';
 import { CartService } from '../../../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-card',
@@ -24,7 +25,8 @@ export class ProductCardComponent {
     private productsService: ProductsService,
     private cartService: CartService,
     private router: Router,
-    private snackbar: MatSnackBar) {
+    private snackbar: MatSnackBar,
+    private messageService:MessageService) {
     let dummyProduct = new Product();
     dummyProduct.name = 'Telescop';
     dummyProduct.description = 'ceva descriere 123 4 5 6';
@@ -42,6 +44,10 @@ export class ProductCardComponent {
       res => window.location.reload()
     );
     
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   onOpenDialog() {
@@ -64,7 +70,7 @@ export class ProductCardComponent {
     this.cartService.addToCart(this.product._id as string).subscribe({
       next: (res) => {
         if(res.success) {
-          this.snackbar.open(`Product ${this.product.name} added to cart`);
+          this.showConfirmation(`Product ${this.product.name} added to cart`);
         }
       },
       error: (error) => {
@@ -73,5 +79,9 @@ export class ProductCardComponent {
       }
     })
 
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 }

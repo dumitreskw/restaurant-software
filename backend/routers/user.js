@@ -1,5 +1,5 @@
 import express from "express";
-import { addAddress, deleteAddress, getAdresses, login, logout, register, verify } from "../controllers/user.js";
+import { addAddress, deleteAddress, getAdresses, login, logout, register, verify, getUsers } from "../controllers/user.js";
 import { isAuthenticated } from "../middleware/auth.js";
 import { getCategories, addCategory, getProductsByCategory, addProduct, updateProduct, deleteProduct, getProducts, getProductsWithCategories, getProductById, getProductsNames } from "../controllers/product.js";
 
@@ -21,5 +21,6 @@ router.route("/delete-product").post(deleteProduct);
 router.route("/address").get(isAuthenticated,getAdresses);
 router.route("/address").post(isAuthenticated,addAddress);
 router.route("/delete-address").post(isAuthenticated, deleteAddress);
+router.route("/users").get(isAuthenticated, getUsers);
 
 export default router;

@@ -1,9 +1,10 @@
 <div class="wrapper">
+  <p-fieldset legend="Login">
     <form [formGroup]="form" (ngSubmit)="login()" class="form">
         <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
             <input type="email" matInput [formControl]="emailControl"
-                   placeholder="Ex. name@example.com">
+                    placeholder="Ex. name@example.com">
             @if (emailControl.hasError('email') && !emailControl.hasError('required')) {
               <mat-error>Please enter a valid email address</mat-error>
             }
@@ -20,4 +21,5 @@
           </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Login</button>
     </form>
+  </p-fieldset>
 </div>

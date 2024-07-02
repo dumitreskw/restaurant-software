@@ -1,0 +1,7 @@
+<div class="content" *ngIf="!!chart">
+    <p-fieldset [legend]="chart.title">
+        <div class="card">
+            <p-chart [type]="chart.type" [data]="chart.data" [options]="chart.options" />
+        </div>
+    </p-fieldset>
+</div>

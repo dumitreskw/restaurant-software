@@ -55,8 +55,8 @@
                       <mat-icon>person</mat-icon>
                       <span>My Profile</span>
                     </button>
-                    <button mat-menu-item disabled>
-                      <mat-icon>person</mat-icon>
+                    <button mat-menu-item (click)="onMyTicketsClicked()">
+                      <mat-icon>article</mat-icon>
                       <span>My Tickets</span>
                     </button>
                     <button mat-menu-item (click)="onMyReservationsClicked()">
@@ -90,6 +90,7 @@
   </div>
   
   <div class="body">
+    <p-toast />
     <router-outlet></router-outlet>
   </div>
   
