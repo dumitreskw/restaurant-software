@@ -195,9 +195,16 @@ class ReservationController {
                 .status(402)
                 .json({ message: "Bad request. Unauthorized access." });
             }
-            const reservation = await Reservation.find({customer: userId});
 
-            return res.status(200).json(reservation);
+            console.log(req.user);
+            if(req.user.role != 'ADMIN') {
+                const reservation = await Reservation.find({customer: userId});
+                return res.status(200).json(reservation);
+            }
+
+            const reserv = await Reservation.find();
+            return res.status(200).json(reserv);
+
         } catch (error) {
             res.status(500).json({
                 message: "Server error. Please try again later",

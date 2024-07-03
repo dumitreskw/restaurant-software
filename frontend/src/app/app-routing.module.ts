@@ -19,6 +19,7 @@ import { ProductPageComponent } from './components/overview/product-page/product
 import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
 import { MyTicketsComponent } from './components/profile/my-tickets/my-tickets.component';
 import { AdminTicketsComponent } from './components/admin/admin-tickets/admin-tickets.component';
+import { AdminReservationsComponent } from './components/admin/admin-reservations/admin-reservations.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -39,6 +40,7 @@ const routes: Routes = [
       {path: 'users', component:  UsersComponent, canActivate:[adminGuard]},
       {path: 'tickets', component:  AdminTicketsComponent, canActivate:[adminGuard]},
       {path: 'products', component:  ProductsComponent, canActivate:[adminGuard]},
+      {path: 'reservations', component:  AdminReservationsComponent, canActivate:[adminGuard]},
     ]
   },
   {path: "product", component: ProductPageComponent},
