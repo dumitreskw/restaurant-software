@@ -1,1 +1,63 @@
-<p>users works!</p>
+<p-fieldset [legend]="'Tickets'"> 
+    <div class="mb-3">
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-left" 
+            (click)="prev()" 
+            [disabled]="isFirstPage()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button"
+            icon="pi pi-refresh" 
+            (click)="reset()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-right" 
+            (click)="next()" 
+            [disabled]="isLastPage()" 
+            styleClass="p-button-text" />
+    </div>
+
+    <div class="card">
+        <p-table
+            [value]="users"
+            [paginator]="true"
+            [rows]="10"
+            [first]="first"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '60rem' }"
+            [scrollable]="true"
+            [loading]="isLoading"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            (onPage)="pageChange($event)"
+            [rowsPerPageOptions]="[10, 25, 50]"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:20%">Name</th>
+                    <th style="width:20%">Email</th>
+                    <th style="width:20%">Joined</th>
+                    <th style="width:20%">Verified</th>
+                    <th style="width:20%">Role</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.createdAt }}</td>
+                    <td>{{user.verified}}</td>
+                    <td>{{user.role}}</td>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="" styleClass="p-button-text" />
+            </ng-template>
+        </p-table>
+    </div>
+</p-fieldset>

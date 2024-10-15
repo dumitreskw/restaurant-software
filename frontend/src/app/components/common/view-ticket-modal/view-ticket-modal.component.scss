@@ -1,0 +1,49 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .ticket-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 10vw
+    }
+
+    .messages {
+        height: 45vh;
+        border-radius: 8px;
+        border: 1px solid #252525;
+        overflow: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .left-message {
+            border-radius: 8px;
+            padding: 8px;
+            background-color: #4E4F50;
+        }
+
+        .right-message {
+            border-radius: 8px;
+            padding: 8px;
+            background-color: #0080ff;
+        }
+    }
+
+    .add-message-content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        .text-area {
+            border-radius: 8px;
+        }
+
+
+    }
+}
+
+p {
+    color: white;
+}

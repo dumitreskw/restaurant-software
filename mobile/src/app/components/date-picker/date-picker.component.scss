@@ -1,0 +1,19 @@
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        
+        .available-dates{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}

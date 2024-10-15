@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 128px;
+    .top-statistics {
+        display: flex;
+        gap: 16px;
+        justify-content: space-evenly
+    }
+
+    .graphs{
+        display: flex;
+        gap: 8px;
+    }
+}

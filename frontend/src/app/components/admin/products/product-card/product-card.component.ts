@@ -6,6 +6,8 @@ import { AuthenticationService } from '../../../../services/authentication.servi
 import { ProductsService } from '../../../../services/products.service';
 import { CartService } from '../../../../services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-card',
@@ -15,11 +17,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductCardComponent {
   @Input() product!: Product;
   @Input() inEdit: boolean = false;
+  priceString: string = '';
+  image: string = 'http://localhost:3000/images/no-image.jpg';
+  
   constructor(public dialog: MatDialog,
     private authService: AuthenticationService,
     private productsService: ProductsService,
     private cartService: CartService,
-    private snackbar: MatSnackBar) {
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private messageService:MessageService) {
     let dummyProduct = new Product();
     dummyProduct.name = 'Telescop';
     dummyProduct.description = 'ceva descriere 123 4 5 6';
@@ -28,6 +35,8 @@ export class ProductCardComponent {
     if (!this.product) {
       this.product = dummyProduct;
     }
+  
+    this.priceString = `${this.product.price.toString()} RON`
   }
 
   onDelete() {
@@ -35,6 +44,10 @@ export class ProductCardComponent {
       res => window.location.reload()
     );
     
+  }
+
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   onOpenDialog() {
@@ -45,6 +58,11 @@ export class ProductCardComponent {
           productId: productId,
         },
       });
+
+      console.log(this.product)
+    }
+    else {
+      this.router.navigate(['/product', {id: this.product._id}])
     }
   }
 
@@ -52,7 +70,7 @@ export class ProductCardComponent {
     this.cartService.addToCart(this.product._id as string).subscribe({
       next: (res) => {
         if(res.success) {
-          this.snackbar.open(`Product ${this.product.name} added to cart`);
+          this.showConfirmation(`Product ${this.product.name} added to cart`);
         }
       },
       error: (error) => {
@@ -61,5 +79,9 @@ export class ProductCardComponent {
       }
     })
 
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 }

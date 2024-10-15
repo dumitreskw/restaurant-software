@@ -19,7 +19,7 @@ export const getCategories = async (req, res) => {
 };
 
 export const addCategory = async (req, res) => {
-  const { name } = req.body;
+  const { name, type } = req.body;
 
   if (!name) {
     return res.status(400).json({
@@ -37,8 +37,13 @@ export const addCategory = async (req, res) => {
       });
     }
 
+    if (!type) {
+      type = "Food";
+    }
+
     category = await Category.create({
       name,
+      type,
       products: [],
     });
 
@@ -47,7 +52,6 @@ export const addCategory = async (req, res) => {
       message: "Category added",
     });
   } catch (error) {
-    console.log("here");
     return res.status(500).json({
       success: false,
       message: error,
@@ -89,9 +93,11 @@ export const getProductsWithCategories = async (req, res) => {
       });
     }
     let categoriesWithProducts = [];
+
     categories.forEach((c) => {
       categoriesWithProducts.push({
         category: c.name,
+        type: c.type,
         products: c.products,
       });
     });
@@ -134,7 +140,7 @@ export const getProductsByCategory = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { name, price, description, quantity, categoryName } = req.body;
+  const { name, price, description, quantity, categoryName, type, imageUrl } = req.body;
   console.log(req.body);
   if (!name || !price || !description || !categoryName) {
     return res.status(400).json({
@@ -142,19 +148,20 @@ export const addProduct = async (req, res) => {
       message: "All fields are required.",
     });
   }
-
+  
   try {
     let category = await Category.findOne({ name: categoryName });
 
     if (!category) {
       category = await Category.create({
         name: categoryName,
+        type: type,
         products: [],
       });
     }
 
     const id = await Product.countDocuments();
-
+    const imgUrl = imageUrl ?? 'http://localhost:3000/images/no-image.jpg'
     const product = await Product.create({
       name: name,
       price: Number(price),
@@ -162,6 +169,7 @@ export const addProduct = async (req, res) => {
       quantity: 23,
       categoryName: categoryName,
       index: id,
+      imageUrl: imgUrl
     });
 
     category.products.push(product);
@@ -180,7 +188,7 @@ export const addProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-  const { name, price, description, quantity, id } = req.body;
+  const { name, price, description, quantity, id, imageUrl } = req.body;
 
   if (!id) {
     return res.status(400).json({
@@ -202,6 +210,10 @@ export const updateProduct = async (req, res) => {
 
     if (description) {
       product.description = description;
+    }
+
+    if(imageUrl) {
+      product.imageUrl = imageUrl;
     }
 
     let category = await Category.findOne({ name: product.categoryName });
@@ -261,7 +273,7 @@ export const deleteProduct = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const { id } = req.body;
-    const product = await Product.findOne({_id : id});
+    const product = await Product.findOne({ _id: id });
 
     if (!product) {
       return res.status(400).json({
@@ -273,6 +285,30 @@ export const getProductById = async (req, res) => {
     return res.status(200).json({
       success: true,
       product: product,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+export const getProductsNames = async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    if (!products) {
+      return res.status(400).json({
+        success: false,
+        message: "No products are available, please add one",
+      });
+    }
+
+    const names = products.map((p) => ({ id: p._id, name: p.name }));
+
+    return res.status(200).json({
+      names,
     });
   } catch (error) {
     return res.status(500).json({

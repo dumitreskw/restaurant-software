@@ -10,6 +10,7 @@ import { EVENT_NAME } from '../../../constants/event-names';
 import { Subject, takeUntil } from 'rxjs';
 import { InvoiceService } from '../../../services/invoice.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -20,6 +21,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   cart: Cart = new Cart();
   addresses: any[] = [];
   addressControl: FormControl = new FormControl('', Validators.required);
+  selectedAddress: any;
   private onComponentDestroy: Subject<any> = new Subject<any>();
 
   constructor(
@@ -28,7 +30,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     private invoiceService: InvoiceService,
     public dialog: MatDialog,
     private eventBus: NgEventBus,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -111,7 +114,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     this.invoiceService.createInvoice()
     .subscribe({
       next: (res) => (console.log(res)),
-      complete: () => this.router.navigateByUrl('/orders'),
+      complete: () => {
+        this.showConfirmation("Payment confirmed successfully.")
+        this.router.navigateByUrl('/orders')},
       error: (err) => console.error(err)
     })
   }
@@ -121,5 +126,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       .on(EVENT_NAME.ADD_ADDRESS)
       .pipe(takeUntil(this.onComponentDestroy))
       .subscribe(() => this.getAddresses());
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 }

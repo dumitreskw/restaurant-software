@@ -1,0 +1,67 @@
+<p-fieldset [legend]="'Tickets'"> 
+    <div class="mb-3">
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-left" 
+            (click)="prev()" 
+            [disabled]="isFirstPage()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button"
+            icon="pi pi-refresh" 
+            (click)="reset()" 
+            styleClass="p-button-text" />
+        <p-button 
+            type="button" 
+            icon="pi pi-chevron-right" 
+            (click)="next()" 
+            [disabled]="isLastPage()" 
+            styleClass="p-button-text" />
+    </div>
+
+    <div class="card">
+        <p-table
+            [value]="reservations"
+            [paginator]="true"
+            [rows]="10"
+            [first]="first"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '60rem' }"
+            [scrollable]="true"
+            [loading]="isLoading"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            (onPage)="pageChange($event)"
+            [rowsPerPageOptions]="[10, 25, 50]"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:20%">Id</th>
+                    <th style="width:20%">Start Date</th>
+                    <th style="width:20%">Size</th>
+                    <th style="width:20%">Status</th>
+                    <th style="width:20%">Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-reservation>
+                <tr>
+                    <td>{{ reservation._id }}</td>
+                    <td>{{ reservation.startTime}}</td>
+                    <td>{{ reservation.size }}</td>
+                    <td>{{reservation.status}}</td>
+                    <td>
+                        <div class="actions" *ngIf="reservation.status != 'COMPLETED'">
+                            <p-button icon="pi pi-check" [rounded]="true" [text]="true" severity="success"/>
+                            <p-button icon="pi pi-times" [rounded]="true" [text]="true" severity="danger"/>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="" styleClass="p-button-text" />
+            </ng-template>
+        </p-table>
+    </div>
+</p-fieldset>

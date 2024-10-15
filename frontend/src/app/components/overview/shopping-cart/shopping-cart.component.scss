@@ -68,15 +68,7 @@
                 flex-direction: column;
                 padding: 16px;
 
-                .items {
-                    display: flex;
-                    flex-direction: column;  
-                }
 
-                .item {
-                    display: grid;
-                    grid-template-columns: 1fr auto;
-                }
 
                 .last {
                     border-bottom: 1px solid white;
@@ -169,3 +161,118 @@ mat-radio-button {
         box-shadow: 0px 2px 8px #002244;
     }
  }
+
+
+ .content {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+
+    .cart {
+        min-width: 40vw;
+        overflow-y: auto;
+        height: 80vh;
+
+        p-cart{
+            height: 80vh;
+        }
+    }
+
+    .summary {
+        min-width: 20vw;
+    }
+ }
+
+ /* Layout */
+.grid { display: grid; }
+.grid-nogutter { grid-row-gap: 0; grid-column-gap: 0; } /* Adjust gap values as needed */
+.col-12 { grid-column: span 12 / span 12; } 
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.sm\:flex-row {
+    display: flex; /* For smaller screens (sm and below) */
+    flex-direction: row; /* Align items in a row on larger screens */
+  }
+.flex-row { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.justify-content-between { justify-content: space-between; }
+.justify-content-center { justify-content: center; }
+.align-items-center { align-items: center; }
+.align-items-start { align-items: flex-start; } /* Align items to the start (top) on larger screens */
+.flex-1 { flex: 1; }
+.gap-3 { gap: 0.75rem; } /* 1rem = 16px */
+.gap-4 { gap: 1rem; } 
+.gap-5 { gap: 1.25rem; } 
+.gap-2 { gap: 0.5rem; } 
+
+/* Sizing */
+.md\:w-10rem { width: 10rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.p-4 { padding: 1rem; }
+.p-1 { padding: 0.25rem; }
+.py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+
+/* Typography */
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.text-900 { color: #18181b; } /* Assuming this is the dark text color you want */
+.text-secondary { color: #6b7280; }
+
+/* Backgrounds */
+.surface-0 { background-color: #ffffff; } /* Assuming this is your background color */
+.surface-100 { background-color: #f9fafb; } /* Assuming this is your surface color */
+
+/* Borders */
+.border-top-1 { border-top: 1px solid black; }
+.surface-border { border-color: #d4d4d8; } /* Assuming this is your border color */
+.border-round { border-radius: 0.375rem; } /* Adjust the border-radius as needed */
+
+/* Other */
+.block { display: block; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.mt-2 { margin-top: 0.5rem; }
+.white-space-nowrap { white-space: nowrap; } /* Prevent text from wrapping */
+
+.items {
+    display: flex;
+    flex-direction: column;  
+    margin: 0;
+    padding: 0;
+}
+
+.costs {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: large;
+}
+
+.p-image {
+    width: 10rem;
+    height: 10rem;
+}
+
+.cart-card {
+    max-height: 80vh;
+}
+
+.address {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-width {
+    width: 100%;
+}

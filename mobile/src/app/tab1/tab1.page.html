@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-segment value="food-menu">
+      <ion-segment-button value="food-menu" (click)="onFoodMenu()">
+        <ion-icon name="pizza-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="drinks-menu" (click)="onDrinksMenu()">
+        <ion-icon name="wine-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-menu></app-menu>
+</ion-content>

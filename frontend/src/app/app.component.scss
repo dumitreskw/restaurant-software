@@ -6,30 +6,29 @@
     display: grid;
 
     grid-template-rows: auto 1fr auto;
-
-    mat-toolbar {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-
-        .links {
-            justify-self: center;
-        }
-    }
 }
 
-a {
-    text-decoration: none;
-    color: whitesmoke;
+.card {
+    background: var(--surface-card);
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px -3px #252525;
 }
 
-a:hover {
-    color: #00FFFF;
+.label {
+    margin-left: 5px;
 }
 
-.active-link {
-    color: #00CED1;
+.ml-2 {
+    margin-left: 16px;
 }
-
+    
+.flex-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 .spaced {
     display: flex;

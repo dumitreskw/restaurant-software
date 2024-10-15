@@ -1,0 +1,61 @@
+.wrapper {
+    display: flex;
+    margin-top: 8px;
+    justify-content: center;
+
+    .content {
+        border-radius: 8px;
+        padding: 16px;
+        width: max-content;
+        height: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .product {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            .title {
+                font-size: 40px;
+            }
+
+            .details {
+                min-width: 1600px;
+                display: flex;
+                gap: 24px;
+
+                .informations {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 56px;
+
+                    .info {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+
+                        .name {
+                            font-size: 24px;
+                        }
+    
+                        .text {
+                            font-size: 16px;
+                            margin-left: 16px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+img {
+    max-width: 300px;
+    max-height: 500px;
+}

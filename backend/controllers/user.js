@@ -8,9 +8,6 @@ import { sendToken } from "../utils/sendToken.js";
 export const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    // const { avatar } = req.files;
-
-    console.log(req.body);
 
     let user = await User.findOne({ email });
     if (user) {
@@ -145,7 +142,6 @@ export const getAdresses = async (req, res) => {
       });
     }
 
-
     return res.status(200).json(user.addresses);
   } catch (error) {
     return res.status(500).json({
@@ -221,3 +217,15 @@ export const deleteAddress = async (req, res) => {
     });
   }
 };
+
+export const getUsers = async(req, res) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}

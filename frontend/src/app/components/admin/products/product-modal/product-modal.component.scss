@@ -22,3 +22,16 @@ mat-dialog-actions {
 .actions {
     justify-self: end;
 }
+
+.file-upload-main {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 16px;
+    margin-bottom: 16px;
+    .photo, img {
+        width: 128px;
+        height: 128px;
+        border-radius: 16px;
+        border: 1px solid #252525;
+    }
+}

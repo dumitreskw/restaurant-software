@@ -1,35 +1,27 @@
   <div class="wrapper">
-    <form [formGroup]="form" class="form">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput type="text" [formControl]="emailControl">
-          @if (emailControl.value && !form.disabled) {
-            <button matSuffix mat-icon-button aria-label="Clear" *ngIf="!emailControl.disabled" (click)="emailControl.reset()">
-              <mat-icon>close</mat-icon>
-            </button>
-          }
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Subject</mat-label>
-            <input matInput type="text" [formControl]="subjectControl">
-            @if (subjectControl.value && !form.disabled) {
-              <button matSuffix mat-icon-button aria-label="Clear" (click)="subjectControl.reset()">
-                <mat-icon>close</mat-icon>
-              </button>
-            }
+    <p-fieldset legend="Support">
+      <form [formGroup]="form" class="form">
+          <mat-form-field>
+              <mat-label>Subject</mat-label>
+              <input matInput type="text" [formControl]="subjectControl">
+              @if (subjectControl.value && !form.disabled) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="subjectControl.reset()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+            </mat-form-field>
+      
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              [formControl]="textControl"
+              cdkAutosizeMinRows="15"
+              cdkAutosizeMaxRows="30"></textarea>
           </mat-form-field>
-    
-        <mat-form-field>
-          <mat-label>Description</mat-label>
-          <textarea matInput
-            cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize"
-            [formControl]="textControl"
-            cdkAutosizeMinRows="15"
-            cdkAutosizeMaxRows="30"></textarea>
-        </mat-form-field>
-
-        <button mat-raised-button color="primary">Submit</button>
-      </form>
+  
+          <button mat-raised-button color="primary" (click)="sendTicket()">Submit</button>
+        </form>
+    </p-fieldset>
   </div>

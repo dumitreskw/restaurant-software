@@ -1,1 +1,15 @@
-<p>admin-overview works!</p>
+<div class="content">
+    <div class="top-statistics">
+        @for (stat of topStatistics; track null) {
+          <p-panel [header]="stat.title">
+            <h1>{{stat.value}}</h1>
+          </p-panel>
+        }
+    </div>
+    <div class="graphs">
+        <app-chart [chart]="invoiceChart"></app-chart>
+        <app-chart [chart]="reservationChart"></app-chart>
+        <app-chart [chart]="revenueChart"></app-chart>
+
+    </div>
+</div>

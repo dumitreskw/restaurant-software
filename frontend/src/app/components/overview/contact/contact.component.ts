@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { MessageService } from 'primeng/api';
+import { TicketService } from '../../../services/ticket.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -10,14 +13,15 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class ContactComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(
+    private authService: AuthenticationService,
+    private messageService: MessageService,
+    private ticketService: TicketService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
-  }
-
-  get emailControl() {
-    return this.form.controls['email'] as FormControl;
   }
 
   get subjectControl() {
@@ -30,14 +34,49 @@ export class ContactComponent implements OnInit {
 
   private buildForm(): void {
     this.form = new FormGroup({
-      email: new FormControl('', Validators.required),
       subject: new FormControl('', Validators.required),
       text: new FormControl('', Validators.required),
     });
+  }
 
-    if(this.authService.isAuthenticated()) {
-      this.emailControl.disable();
-      this.emailControl.setValue('test@test.com');
+  public sendTicket(): void {
+    let ticket: any;
+    if (this.subjectControl.valid && this.textControl.valid) {
+      this.ticketService
+        .createTicket(this.subjectControl.value, this.textControl.value)
+        .subscribe({
+          next: (res) => (ticket = res),
+          complete: () =>{
+            this.showConfirmation(
+              `Ticket ${ticket._id} was created successfully`
+            );
+            this.router.navigateByUrl('/my-tickets');
+          },
+          error: (err) => {
+            console.error(err);
+            this.showError(
+              "Couldn't create the ticket. Please try again later."
+            );
+          },
+        });
+    } else {
+      this.showError('All fields are required.');
     }
+  }
+
+  showConfirmation(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  showError(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+    });
   }
 }

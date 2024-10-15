@@ -1,0 +1,35 @@
+<p-card class="wrapper">
+    @if (showPage) {
+        <div class="content">
+            <div class="product">
+                <p class="title">{{product.name}}</p>
+                <div class="details">
+                    <div class="image">
+                        <img mat-card-image [src]="product.imageUrl ?? 'http://localhost:3000/images/no-image.jpg'">
+                    </div>
+
+                    <div class="informations">
+                        <div class="info">
+                            <div class="name"><h1>Category</h1></div>
+                            <div class="text">{{product.categoryName}}</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="name"><h1>Description</h1></div>
+                            <div class="text">{{product.description}}</div>
+                        </div>
+
+                        <div class="info">
+                            <div class="name"><h1>Price</h1></div>
+                            <div class="text">{{product.price}} RON</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button (click)="addToCart()" *ngIf="isAuthenticated">Add to cart</button>
+            </div>
+        </div>
+    }
+</p-card>

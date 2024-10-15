@@ -38,6 +38,21 @@ import { AddressModalComponent } from './components/profile/address-modal/addres
 import { MatRadioModule } from '@angular/material/radio';
 import { OrdersComponent } from './components/profile/orders/orders.component';
 import {MatTableModule} from '@angular/material/table';
+import { ProductPageComponent } from './components/overview/product-page/product-page.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatListModule} from '@angular/material/list';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ImportsModule } from './primeng-imports';
+import { SvgIconComponent } from './components/common/svg-icon/svg-icon.component';
+import { MyReservationsComponent } from './components/profile/my-reservations/my-reservations.component';
+import { FileUploadComponent } from './components/common/file-upload/file-upload.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { MyTicketsComponent } from './components/profile/my-tickets/my-tickets.component';
+import { ViewTicketModalComponent } from './components/common/view-ticket-modal/view-ticket-modal.component';
+import { ChartComponent } from './components/common/chart/chart.component';
+import { AdminTicketsComponent } from './components/admin/admin-tickets/admin-tickets.component';
+import { AdminOrdersComponent } from './components/admin/admin-orders/admin-orders.component';
+import { AdminReservationsComponent } from './components/admin/admin-reservations/admin-reservations.component';
 
 @NgModule({
   declarations: [
@@ -58,13 +73,24 @@ import {MatTableModule} from '@angular/material/table';
     ShoppingCartComponent,
     BookATableComponent,
     AddressModalComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductPageComponent,
+    SvgIconComponent,
+    MyReservationsComponent,
+    FileUploadComponent,
+    MyTicketsComponent,
+    ViewTicketModalComponent,
+    ChartComponent,
+    AdminTicketsComponent,
+    AdminOrdersComponent,
+    AdminReservationsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxFileDropModule,
     JwtModule.forRoot({
       config: {
         allowedDomains: ["localhost"],
@@ -85,11 +111,15 @@ import {MatTableModule} from '@angular/material/table';
     MatSnackBarModule,
     MatMenuModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule,
+    MatListModule,
+    ImportsModule
   ],
   providers: [
     NgEventBus,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000, horizontalPosition: 'end', verticalPosition: 'bottom' } }
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000, horizontalPosition: 'end', verticalPosition: 'bottom' } },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
