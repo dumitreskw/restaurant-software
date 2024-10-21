@@ -6,7 +6,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import ReservationRouter from "./routers/reservation.js";
 import multer from "multer";
-import path from "path";
 import TicketsRouter from "./routers/ticket.js";
 import StatisticsRouter from "./routers/statistics.js";
 
